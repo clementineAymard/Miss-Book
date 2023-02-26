@@ -15,6 +15,7 @@
 @import './components/about.css';
 @import './components/filter.css';
 @import './components/books.css';
+@import './components/book-details.css';
 
 /* MEDIA QUERIS */
 @import './setup/mq.css';

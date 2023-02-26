@@ -13,13 +13,13 @@ export default {
                 min="10"
                 max="200"
                 type="range"/>
-            <label>{{this.filterBy.listPrice.amount}}</label>
+            <label v-if="filterBy">{{this.filterBy.listPrice.amount}}</label>
                 
         </section>
     `,
     data() {
         return {
-            filterBy: { title: '', listPrice: { amount: 0 } }
+            filterBy: { title: '', listPrice: { amount: 10 } }
         }
     },
     methods: {
