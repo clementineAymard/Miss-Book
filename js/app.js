@@ -23,7 +23,7 @@ const options = {
     `,
     data() {
         return {
-            route: 'BookIndex',
+            route: 'HomePage',
         }
     },
     // methods: {},
