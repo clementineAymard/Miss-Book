@@ -10,19 +10,25 @@ export default {
     // props:[], 
     template: `
     <section class="book-index">
-        <BookFilter @filter="setFilterBy" />
+        <BookFilter @filter="setFilterBy"/>
+        <div class="btn-wrapper" >
+            <button class="btn-add" @click="isEditing = true">Add a book</button>
+        </div>
         <BookList 
             :books="filteredBooks" 
             v-if="books" 
             @remove="removeBook" 
             @show-details="showBookDetails" /> <!-- v-if="books" this is here to prevent any computing before books is loaded from the service! -->
-            
+        
         <BookEdit 
-            @book-saved="onSaveBook"/>
+            v-if="isEditing"
+            @book-saved="onSaveBook"
+            @hide-edit="isEditing=false"/>
         <BookDetails 
             v-if="selectedBook" 
             :book="selectedBook"
-            @hide-details="selectedBook=null"/>  <!-- appears only when selectedBook is not falsy -->
+            @hide-details="selectedBook=null"
+            />  <!-- appears only when selectedBook is not falsy -->
     </section>
     `,
     data() {
@@ -30,6 +36,7 @@ export default {
             books: null,
             selectedBook: null,
             filterBy: { title: '', listPrice: { amount: 10 } },
+            isEditing: false,
         }
     },
     methods: {
@@ -47,6 +54,7 @@ export default {
             this.selectedBook = this.books.find(book => book.id === bookId)
         },
         onSaveBook(newBook) {
+            this.isEditing = false
             this.books.push(newBook)
         },
         setFilterBy(filterBy) {

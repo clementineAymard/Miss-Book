@@ -1,6 +1,8 @@
 .book-list ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-inline: 42px;
+    padding: 0px;
 }
 
 .book-list li {
