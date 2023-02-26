@@ -1,0 +1,16 @@
+.home-page {
+    padding: 10px;
+    width:50vw;
+    margin:auto;
+    margin-block-start: 50px;
+    font-size: 1.5rem;
+
+    display: flex;
+}
+
+.home-page img {
+    margin: 20px;
+    width: 80px;
+    align-self: start;
+    object-fit: contain;
+}

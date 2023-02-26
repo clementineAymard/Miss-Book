@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    /* flex-direction: column; */
+}
+.container {
+    min-height: 100vh;
+    display: grid;  
+    grid-template-rows: 80px 1fr 80px;
+}
+.router-view {
+
+}

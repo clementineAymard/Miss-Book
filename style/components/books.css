@@ -1,0 +1,49 @@
+.book-list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.book-list li {
+    list-style: none;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px lightgrey;
+    margin: 10px;
+    padding: 10px;
+    min-height: 200px;
+    max-width: 250px;
+
+    background-color: rgba(211, 211, 211, 0.3);
+}
+
+.book-list li .btns button {
+    background-color: var(--clrbg);
+    color: var(--clrtxt);
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    cursor: pointer;
+}
+.book-list li .btns button:not(:first-child) {
+    background-color: grey;
+}
+.book-preview h2 {
+    margin: 0;
+    font-family: Arial;
+    font-size: 1rem;
+    text-transform: capitalize;
+    margin-block: 10px;
+}
+
+.book-preview h2 span {
+    font-size: 0.7rem;
+    font-style: italic;
+    color: grey;
+}
+
+.book-preview img {
+    height: 100px;
+    object-fit: contain;
+    aspect-ratio: 1 ;
+}

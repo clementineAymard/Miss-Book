@@ -1,0 +1,33 @@
+header.app-header {
+    background-color: var(--clrbg);
+    color: var(--clrtxt);
+    margin-inline: 0;
+}
+
+.app-header nav {
+    margin-inline-end: 2rem;
+}
+
+.app-header nav a {
+    /* display: block; */
+    padding: 1.25rem;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.app-header nav a:last-child {
+    border-inline-start: solid 1px var(--clrtxt);
+}
+
+.app-header nav a:hover {
+    background-color: var(--clrtxt);
+    color: var(--clrbg );
+}
+
+.app-header nav a.selected {
+    box-shadow: inset 0px -4px grey;
+}

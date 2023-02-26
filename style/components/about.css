@@ -1,0 +1,11 @@
+.about-page {
+    padding: 10px;
+    width: 50vw;
+    margin: auto;
+    margin-block-start: 50px;
+    text-align: center;
+}
+
+.about-page p {
+    line-height: 1.5;
+}

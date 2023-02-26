@@ -1,0 +1,9 @@
+/* MEDIUM */
+@media (max-width:920px) {}
+
+/* SMALL: */
+
+@media (max-width: 630px) {}
+
+
+@media (min-width:360px) {}
