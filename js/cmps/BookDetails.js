@@ -4,18 +4,22 @@ export default {
     props: ['book'],
     template: `
     <section class="book-details flex column">
-        <button @click="closeDetails">Close</button> 
-        <img :src="book.thumbnail" >
-        <h1 class="title"><span>Title: </span>{{book.title}}</h1>
-        <h1><span>Subtitle: </span>{{book.subtitle}}</h1>
-        <h2><span>Authors: </span>{{author}}</h2>
-        <h1><span>Published in: </span>{{bookAge}}</h1>
-        <h1><span>Reading Level: </span>{{level}}</h1>
-        <h2><span>Categories: </span>{{categories}}</h2>
-        <h1><span>Language: </span>{{book.language}}</h1>
-        <h1 class="price"><span>Price: </span><span class="price-amount" v-bind:class="priceClass">{{formattedPrice}}</span></h1>
-        <h1 v-if="book.listPrice.isOnSale===true" class="on-sale">---> On Sale ! <---</h1>
-        <h1><span>Description: </span><LongTxt :txt="book.description" :length="30"/></h1>
+        <button @click="closeDetails">Back to books</button> 
+        <div class="container flex" >
+            <div class="details flex column">
+                <h1 class="title"><span>Title: </span>{{book.title}}</h1>
+                <h1><span>Subtitle: </span>{{book.subtitle}}</h1>
+                <h2><span>Authors: </span>{{author}}</h2>
+                <h1><span>Published in: </span>{{bookAge}}</h1>
+                <h1><span>Reading Level: </span>{{level}}</h1>
+                <h2><span>Categories: </span>{{categories}}</h2>
+                <h1><span>Language: </span>{{book.language}}</h1>
+                <h1 class="price"><span>Price: </span><span class="price-amount" v-bind:class="priceClass">{{formattedPrice}}</span></h1>
+                <h1 v-if="book.listPrice.isOnSale===true" class="on-sale">---> On Sale ! <---</h1>
+                <h1><span>Description: </span><LongTxt :txt="book.description" :length="30"/></h1>
+            </div>
+            <img :src="book.thumbnail" >
+        </div>
         <!-- <h1><span>Description: </span>{{book.description}}</h1> -->
     </section>
     `,
