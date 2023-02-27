@@ -5,27 +5,18 @@ export default {
     template: `
     <section class="book-details flex column">
         <button @click="closeDetails">Close</button> 
+        <img :src="book.thumbnail" >
         <h1 class="title"><span>Title: </span>{{book.title}}</h1>
         <h1><span>Subtitle: </span>{{book.subtitle}}</h1>
-        <h2><span>Authors: </span></h2>
-        <ul class="authors">
-            <li v-for="author in book.authors" :key="book.id" class="clean-list">
-                {{author}}, 
-            </li>
-        </ul>
+        <h2><span>Authors: </span>{{author}}</h2>
         <h1><span>Published in: </span>{{bookAge}}</h1>
-        <h1><span>Description: </span>{{book.description}}</h1>
-        <h1><span>Level: </span>{{reading}}</h1>
-        <h2><span>Categories: </span></h2>
-        <ul class="categories">
-            <li v-for="category in book.categories" :key="book.id" class="clean-list">
-                {{category}}, 
-            </li>
-        </ul>
+        <h1><span>Reading Level: </span>{{level}}</h1>
+        <h2><span>Categories: </span>{{categories}}</h2>
         <h1><span>Language: </span>{{book.language}}</h1>
-        <h1 class="price"><span>Price: </span><span class="price-amount" v-bind:class="priceClass">{{book.listPrice.amount}}</span> {{book.listPrice.currencyCode}}</h1>
+        <h1 class="price"><span>Price: </span><span class="price-amount" v-bind:class="priceClass">{{formattedPrice}}</span></h1>
         <h1 v-if="book.listPrice.isOnSale===true" class="on-sale">---> On Sale ! <---</h1>
-        <LongTxt :txt="" :length=""/>
+        <h1><span>Description: </span><LongTxt :txt="book.description" :length="30"/></h1>
+        <!-- <h1><span>Description: </span>{{book.description}}</h1> -->
     </section>
     `,
     // data(){return {
@@ -37,21 +28,33 @@ export default {
         }
     },
     computed: {
-        reading() {
+        level() {
             const pageCount = this.book.pageCount
             if (pageCount < 100) return 'Light Reading'
             if (pageCount > 200) return 'Decent Reading'
             if (pageCount > 500) return 'Serious Reading'
+            else return pageCount + ' pages'
         },
         bookAge() {
             const yrs = this.book.publishedDate
-            const today = new Date()
-            if (Math.round(today.getYear() + 1900 - yrs) > 10) return 'Vintage'
-            if (today.getYear() + 1900 - yrs < 1) return 'New'
+            const today = new Date().getFullYear()
+            if (Math.round(today - yrs) > 10) return `${yrs}, Vintage`
+            if (today - yrs < 1) return `${yrs}, New`
+            else return yrs
+        },
+        formattedPrice() {
+            const { amount, currencyCode } = this.book.listPrice
+            return new Intl.NumberFormat('en', {style:'currency', currency:currencyCode}).format(amount)
         },
         priceClass() {
             return (this.book.listPrice.amount > 150) ? 'red' : (this.book.listPrice.amount < 20) ? 'green' : ''
-        }
+        },
+        author() {
+            return this.book.authors.join(', ')
+        },
+        categories() {
+            return this.book.categories.join(', ')
+        },
     },
     components: {
         LongTxt,

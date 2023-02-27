@@ -49,3 +49,7 @@
     object-fit: contain;
     aspect-ratio: 1 ;
 }
+
+.book-preview .price {
+    text-align : end;
+}

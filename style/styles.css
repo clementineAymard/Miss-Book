@@ -17,6 +17,7 @@
 @import './components/books.css';
 @import './components/book-details.css';
 @import './components/book-edit.css';
+@import './components/longtxt.css';
 
 /* MEDIA QUERIS */
 @import './setup/mq.css';

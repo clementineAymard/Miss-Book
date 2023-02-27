@@ -16,7 +16,7 @@ export default {
         </div>
         <BookList 
             :books="filteredBooks" 
-            v-if="books" 
+            v-if="books&&!selectedBook&&!isEditing" 
             @remove="removeBook" 
             @show-details="showBookDetails" /> <!-- v-if="books" this is here to prevent any computing before books is loaded from the service! -->
         

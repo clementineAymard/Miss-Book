@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         filter() {
-            this.$emit('filter', this.filterBy)
+            this.$emit('filter', {...this.filterBy}) // shallow copy for simple object - deep copy req for object nesting object/s or array/s
         }
     },
     computed: {},

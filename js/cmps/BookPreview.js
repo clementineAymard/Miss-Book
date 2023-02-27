@@ -2,9 +2,9 @@ export default {
     props: ['book'],
     template: `
     <article class="book-preview">
-        <img src="http://coding-academy.org/books-photos/20.jpg" alt="book-thumbnail">
+        <img :src="book.thumbnail" alt="book-thumbnail">
         <h2><span>Title:</span> {{book.title}}</h2>
-        <h2>{{book.listPrice.amount}} <span>{{book.listPrice.currencyCode}}</span> </h2>
+        <h2 class="price">{{formattedPrice}}</h2>
     </article>
     `,
     data() {
@@ -13,9 +13,10 @@ export default {
     },
     methods: {},
     computed: {
-        url(){
-            return book["thumnail"]
-        }
+        formattedPrice() {
+            const { amount, currencyCode } = this.book.listPrice
+            return new Intl.NumberFormat('en', {style:'currency', currency:currencyCode}).format(amount)
+        },
     },
     // created(){},
     // etc.
