@@ -1,6 +1,7 @@
 .add-review {
     padding: 5px;
     box-shadow: -4px -4px 0px 0px var(--clrtxt);
+    /* max-width: 600px; */
 }
 
 .add-review h1 {
@@ -19,13 +20,17 @@
 
 
 .add-review .review-form input,
-select, button {
+.add-review .review-form select,
+.add-review .review-form button {
     line-height: 1.5;
     padding-inline: 5px;
     width: 120px;
     border: none;
     border-radius: 5px;
     box-shadow: 0px 0px 2px 0px grey;
+}
+.add-review .review-form button {
+    cursor: pointer;
 }
 
 .add-review .review-form select {
@@ -41,5 +46,6 @@ select, button {
 
 .add-review .review-form button {
     width: 60px;
-background-color: palegreen ;
+    background-color: palegreen;
+    align-self: start;
 }
