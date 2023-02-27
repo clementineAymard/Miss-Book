@@ -23,7 +23,7 @@ export default {
             </div>
         </div>
         <AddReview :book="this.book"/>
-        <ReviewList :reviews="this.book.reviews"/>
+        <ReviewList :reviews="this.book.reviews" @remove="removeReview"/>
         <!-- <h1><span>Description: </span>{{book.description}}</h1> -->
     </section>
     `,
@@ -35,6 +35,11 @@ export default {
     methods: {
         closeDetails() {
             this.$emit('hide-details')
+        },
+        removeReview(reviewId) {
+            var reviewIdx = this.book.reviews.findIndex(review => review.id === reviewId)
+            this.book.reviews.splice(reviewIdx, 1)
+            bookService.save(this.book)
         }
     },
     computed: {
