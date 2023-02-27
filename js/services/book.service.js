@@ -453,6 +453,7 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
+    addReview,
 }
 
 function query(filterBy = {}) {
@@ -488,7 +489,7 @@ function save(book) {
 function getEmptyBook(title = '', price = 0) {
     return {
         id: '',
-        title:title,
+        title: title,
         subtitle: 'mi est eros convallis auctor arcu dapibus himenaeos',
         authors: [
             'Barbara Cartland'
@@ -506,10 +507,25 @@ function getEmptyBook(title = '', price = 0) {
             amount: price,
             currencyCode: 'EUR',
             isOnSale: false
-        }
+        },
+        reviews: []
     }
 
     // { id: '', title, listPrice: {amount: price} }
+}
+
+function addReview(bookId, review) {
+    console.log(bookId, review)
+    review.id = utilService.makeId()
+    get(bookId).then(book => {
+        if (!book.reviews) {
+            book.reviews = [review]
+        } else {
+            book.reviews.push(review)
+        }
+        save(book)
+        console.log(book)
+    })
 }
 
 function _createBooks() {

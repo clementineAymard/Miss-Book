@@ -8,8 +8,9 @@ export default {
             <li v-for="book in books" :key="book.id" class="flex column space-between">
                 <BookPreview :book="book"/>
                 <div class="btns flex space-evenly">
-                    <button @click="showDetails(book.id)">Details</button>
-                    <button @click="onRemove(book.id)">DELETE</button>
+                    <RouterLink :to="'/books/'+book.id">Details</RouterLink>
+                    <RouterLink :to="'/books/edit/'+book.id">Edit</RouterLink>
+                    <button @click="onRemove(book.id)">Delete</button>
                 </div>
             </li>
         </ul>
@@ -22,14 +23,9 @@ export default {
         onRemove(bookId) {
             this.$emit('remove', bookId)
         },
-        showDetails(bookId) {
-            this.$emit('show-details', bookId)
-        }
     },
     computed: {},
     components: {
         BookPreview,
     }
-    // created(){},
-    // etc.
 }

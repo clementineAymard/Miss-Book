@@ -15,9 +15,14 @@
 @import './components/about.css';
 @import './components/filter.css';
 @import './components/books.css';
+@import './components/books-preview.css';
 @import './components/book-details.css';
 @import './components/book-edit.css';
 @import './components/longtxt.css';
+@import './components/user-msg.css';
+@import './components/add-review.css';
+@import './components/review-list.css';
+@import './components/review-preview.css';
 
 /* MEDIA QUERIS */
 @import './setup/mq.css';

@@ -1,4 +1,4 @@
-.btn-wrapper {
+.btn-add-wrapper {
     background-color: var(--clrtxt);
     padding: 5px;
     padding-inline-start: 42px;
@@ -28,18 +28,15 @@
     border: none;
     border-radius: 10px;
     width: 400px;
+    min-height: 50vh;
     margin-inline: auto;
     padding: 10px;
-    background-color: var(--clrbg);
-
-    /* box-shadow: 0px 0px 0px 100vh rgb(153, 153, 153, 0.5); */
-    font-family: calibri;
-
+    background-color: var(--clrtxt);
+    /* font-family: calibri; */
+    color:brown;
     margin-block: 20px;
-    /* position: absolute;
-    top: 100px;
-    left: 50vw;
-    transform: translateX(-50%); */
+
+    position: relative;
 }
 
 .book-edit h2 {
@@ -49,16 +46,31 @@
     margin-block-end: 10px;
 }
 
-.book-edit button {
+.book-edit .form {
+    align-items: start;
+    gap:10px
+}
+
+.book-edit .form .btn-save {
+    position: absolute;
+    bottom:10px;
+    right:10px;
+    
     font-family: inherit;
-    background-color: transparent;
-    color: rgb(46, 21, 21);
+    background-color: lightgreen;
+    color: brown;
     border: none;
+    border-radius: 5px;
+    padding: 5px;
     cursor: pointer;
     transition: background-color 0.4s ease-out, color 0.4s ease-out;
 }
-
-.book-edit button:hover {
-    background-color: var(--clrbg);
+.book-edit .form .btn-save:hover {
+    background-color: green;
     color: var(--clrtxt);
-}
+ }
+
+ .book-edit .form .new-price {
+    display: flex;
+    gap:10px
+ }

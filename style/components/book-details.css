@@ -2,8 +2,9 @@
     border: none;
     padding: 10px;
     font-family: calibri;
+    gap:2rem;
 
-    margin-block: 20px;
+    margin: 20px;
 }
 
 .book-details img {
@@ -47,12 +48,7 @@
     font-weight:bold;
 }
 
-.book-details li {
-    display: inline;
-    font-size: 0.9rem;
-}
-
-.book-details .authors li {
+.book-details .authors {
     font-size: 1rem;
     font-weight: bold;
     color: brown;
@@ -81,12 +77,12 @@ span.green {
     background-color: blanchedalmond;
 }
 
-.book-details .container {
+.book-details .details-container {
     /* margin-inline: 50px; */
     justify-content: center;
     gap:50px;
 }
 
 .book-details .details {
-    width:400px
+    max-width:400px;
 }

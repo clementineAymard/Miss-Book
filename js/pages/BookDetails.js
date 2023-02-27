@@ -1,11 +1,14 @@
-import LongTxt from './LongTxt.js'
+import LongTxt from '../cmps/LongTxt.js'
+import { bookService } from '../services/book.service.js'
+import AddReview from '../cmps/AddReview.js'
+import ReviewList from '../cmps/ReviewList.js'
 
 export default {
-    props: ['book'],
     template: `
-    <section class="book-details flex column">
-        <button @click="closeDetails">Back to books</button> 
-        <div class="container flex" >
+        <RouterLink to="/books">Back to books</RouterLink> 
+    <section class="book-details flex column" v-if="book">
+        <div class="details-container flex" >
+            <img :src="book.thumbnail" >
             <div class="details flex column">
                 <h1 class="title"><span>Title: </span>{{book.title}}</h1>
                 <h1><span>Subtitle: </span>{{book.subtitle}}</h1>
@@ -15,17 +18,20 @@ export default {
                 <h2><span>Categories: </span>{{categories}}</h2>
                 <h1><span>Language: </span>{{book.language}}</h1>
                 <h1 class="price"><span>Price: </span><span class="price-amount" v-bind:class="priceClass">{{formattedPrice}}</span></h1>
-                <h1 v-if="book.listPrice.isOnSale===true" class="on-sale">---> On Sale ! <---</h1>
+                <h1 v-if="book.listPrice.isOnSale===true" class="on-sale"> On Sale ! </h1>
                 <h1><span>Description: </span><LongTxt :txt="book.description" :length="30"/></h1>
             </div>
-            <img :src="book.thumbnail" >
         </div>
+        <AddReview :book="this.book"/>
+        <ReviewList :reviews="this.book.reviews"/>
         <!-- <h1><span>Description: </span>{{book.description}}</h1> -->
     </section>
     `,
-    // data(){return {
-
-    // }},
+    data() {
+        return {
+            book: null,
+        }
+    },
     methods: {
         closeDetails() {
             this.$emit('hide-details')
@@ -48,7 +54,7 @@ export default {
         },
         formattedPrice() {
             const { amount, currencyCode } = this.book.listPrice
-            return new Intl.NumberFormat('en', {style:'currency', currency:currencyCode}).format(amount)
+            return new Intl.NumberFormat('en', { style: 'currency', currency: currencyCode }).format(amount)
         },
         priceClass() {
             return (this.book.listPrice.amount > 150) ? 'red' : (this.book.listPrice.amount < 20) ? 'green' : ''
@@ -62,7 +68,13 @@ export default {
     },
     components: {
         LongTxt,
-    }
-    // created(){},
+        AddReview,
+        ReviewList,
+    },
+    created() {
+        const { bookId } = this.$route.params
+        bookService.get(bookId)
+            .then(book => this.book = book)
+    },
     // etc.
 }

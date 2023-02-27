@@ -1,43 +1,33 @@
 const { createApp } = Vue
-// import ComponentName from './cmps/ComponentName.js'
+
+import { router } from './routes.js'
 
 import AppHeader from './cmps/AppHeader.js'
 import AppFooter from './cmps/AppFooter.js'
-
-import BookIndex from './cmps/BookIndex.js'
-
-import HomePage from './pages/HomePage.js'
-import AboutUsPage from './pages/AboutUsPage.js'
+import UserMsg from './cmps/UserMsg.js'
 
 const options = {
     template: `
         <section class="container">
-            <AppHeader @setRoute="route = $event"/>  
+            <AppHeader/>  
             <main class="router-view">
-                <HomePage  v-if="route === 'HomePage'"/>  
-                <BookIndex  v-if="route === 'BookIndex'"/>
-                <AboutUsPage v-if="route === 'AboutUsPage'"/>
+                <RouterView />
             </main>
             <AppFooter />
+            <UserMsg/> <!-- is at the bottom so no pblms with z-indexs because last el in DOM wins -->
         </section>
     `,
     data() {
-        return {
-            route: 'HomePage',
-        }
+        return {}
     },
     // methods: {},
     // computed: {},
     components: {
         AppHeader,
         AppFooter,
-        BookIndex: BookIndex,
-        HomePage,
-        AboutUsPage,
+        UserMsg,
     }
 }
 const app = createApp(options)
-
-// app.component('ComponentName', ComponentName)
-
+app.use(router)
 app.mount('#app')
