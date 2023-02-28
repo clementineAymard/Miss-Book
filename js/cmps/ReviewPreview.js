@@ -6,13 +6,5 @@ export default {
         <h2 class="rating"><span>Rated: </span>{{review.rating}}</h2>
         <h2 class="date"><span>Read on: </span>{{review.date}}</h2>
     </article>
-    `,
-    data() {
-        return {
-        }
-    },
-    methods: {},
-    computed: {},
-    // created(){},
-    // etc.
+    `
 }

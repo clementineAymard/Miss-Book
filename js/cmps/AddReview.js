@@ -5,7 +5,7 @@ export default {
     template: `
     <section class="add-review">
         <h1>Leave a review</h1>
-        <form class="review-form flex column" @submit.prevent="addReview(book)">
+        <form class="review-form flex column" @submit.prevent="addReview(book, review)">
             <label>
                 <input type="text" v-model="review.userName" placeholder="Your Name">
             </label>
@@ -35,8 +35,8 @@ export default {
         }
     },
     methods: {
-        addReview(book) {
-            bookService.addReview(book.id, this.review)
+        addReview(book, review) {
+            this.$emit('addedReview', { book, review })
         }
     },
     computed: {},

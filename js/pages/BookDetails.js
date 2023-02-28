@@ -2,6 +2,7 @@ import LongTxt from '../cmps/LongTxt.js'
 import { bookService } from '../services/book.service.js'
 import AddReview from '../cmps/AddReview.js'
 import ReviewList from '../cmps/ReviewList.js'
+import { eventBusService } from '../services/event-bus.service.js'
 
 export default {
     template: `
@@ -22,7 +23,7 @@ export default {
                 <h1><span>Description: </span><LongTxt :txt="book.description" :length="30"/></h1>
             </div>
         </div>
-        <AddReview :book="this.book"/>
+        <AddReview :book="this.book" @addedReview="addReview"/>
         <ReviewList :reviews="this.book.reviews" @remove="removeReview"/>
         <!-- <h1><span>Description: </span>{{book.description}}</h1> -->
     </section>
@@ -36,11 +37,23 @@ export default {
         closeDetails() {
             this.$emit('hide-details')
         },
+        addReview({book, review}) {
+            bookService.addReview(book.id, review)
+                .then(savedBook => {
+                    this.book = savedBook
+                    eventBusService.emit('show-msg', { txt: 'Added Review', type: 'success' })
+                })
+                .catch(err=>{
+                    eventBusService.emit('show-msg', { txt: 'Failed to Add Review', type: 'error' })
+                })
+        },
         removeReview(reviewId) {
-            var reviewIdx = this.book.reviews.findIndex(review => review.id === reviewId)
-            this.book.reviews.splice(reviewIdx, 1)
-            bookService.save(this.book)
-        }
+            bookService.removeReview(this.book.id, reviewId)
+                .then(book => {
+                    eventBusService.emit('show-msg', { txt: 'Removed Review', type: 'success' })
+                    this.book = book
+                })
+        },
     },
     computed: {
         level() {

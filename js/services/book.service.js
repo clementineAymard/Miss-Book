@@ -454,6 +454,7 @@ export const bookService = {
     save,
     getEmptyBook,
     addReview,
+    removeReview,
 }
 
 function query(filterBy = {}) {
@@ -488,7 +489,7 @@ function save(book) {
 
 function getEmptyBook(title = '', price = 0) {
     return {
-        id: '',
+        id: utilService.makeId(11),
         title: title,
         subtitle: 'mi est eros convallis auctor arcu dapibus himenaeos',
         authors: [
@@ -515,16 +516,23 @@ function getEmptyBook(title = '', price = 0) {
 }
 
 function addReview(bookId, review) {
-    console.log(bookId, review)
-    review.id = utilService.makeId()
-    get(bookId).then(book => {
+    // console.log(bookId, review)
+    review.id = utilService.makeId(4)
+    return get(bookId).then(book => {
         if (!book.reviews) {
-            book.reviews = [review]
-        } else {
-            book.reviews.push(review)
+            book.reviews = []
         }
-        save(book)
-        console.log(book)
+        book.reviews.push(review)
+        // console.log(book)
+        return save(book)
+    })
+}
+
+function removeReview(bookId, reviewId) {
+    return get(bookId).then(book=> {
+        var reviewIdx = book.reviews.findIndex(review => review.id === reviewId)
+        book.reviews.splice(reviewIdx, 1)
+        return save(book)
     })
 }
 

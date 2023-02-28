@@ -33,7 +33,7 @@ export default {
 
             bookService.save(this.book)
                 .then(savedBook => {
-                    console.log(savedBook)
+                    // console.log(savedBook)
                     this.$router.push('/books') // this is called imperative routing: because we don't have just a router link : we want to do routing but after some code
                 })
         },
