@@ -1,4 +1,7 @@
-import { bookService } from "../services/book.service.js"
+import RatingSurvey from './RatingSurvey.js'
+import RatingBySelect from './RatingBySelect.js'
+import RatingByTextBox from './RatingByTextBox.js'
+import RatingByStars from './RatingByStars.js'
 
 export default {
     props: ['book'],
@@ -9,14 +12,10 @@ export default {
             <label>
                 <input type="text" v-model="review.userName" placeholder="Your Name">
             </label>
-            <label for="rating">Rate this book : 
-            <select class="rating" id="rating" v-model="review.rating">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select></label>
+            <RatingSurvey @setSurveyAns="setRatingMethod"/>
+            <RatingBySelect v-if="ratingMethod==='Select'"/>
+            <RatingByTextBox v-if="ratingMethod==='TextBox'"/>
+            <RatingByStars v-if="ratingMethod==='Stars'"/>
             <label for="date">When did you read this book ?</label> 
             <input type="date" id="date" v-model="review.date">
             <button>Send</button>
@@ -28,16 +27,27 @@ export default {
             review: {
                 id: '',
                 userName: '',
-                rating: '',
+                // rating: '',
                 date: ''
             },
+            ratingMethod:'select'
             // book: null,
         }
     },
     methods: {
         addReview(book, review) {
             this.$emit('addedReview', { book, review })
+        },
+        setRatingMethod(method) {
+            console.log(method)
+            this.ratingMethod = method
         }
     },
     computed: {},
+    components: {
+        RatingSurvey,
+        RatingBySelect,
+        RatingByTextBox,
+        RatingByStars,
+    }
 }

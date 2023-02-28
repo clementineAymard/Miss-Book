@@ -4,7 +4,7 @@
     padding-inline-start: 42px;
 }
 
-.book-filter input:first-child {
+.book-filter input[type="text"] {
     margin-inline-end: 20px;
     padding: 10px;
     border: none;
@@ -12,8 +12,8 @@
     box-shadow: 0px 0px 3px 0px grey;
 }
 
-.book-filter input:nth-child(2) {
-    margin-inline-end: 10px;
+.book-filter input {
+    margin-inline: 10px;
     padding: 10px;
     border: none;
 }

@@ -1,8 +1,9 @@
 import HomePage from './pages/HomePage.js'
-import AboutUsPage, {AboutTeam, AboutServices} from './pages/AboutUsPage.js'
+import AboutUsPage, {AboutTeam, AboutGoal} from './pages/AboutUsPage.js'
 import BookIndex from './pages/BookIndex.js'
 import BookDetails from './pages/BookDetails.js'
 import BookEdit from './pages/BookEdit.js'
+import BookAdd from './pages/BookAdd.js'
 
 const { createRouter, createWebHashHistory } = VueRouter
 
@@ -18,12 +19,12 @@ const options = {
             component: AboutUsPage,
             children:[ // this means that this component contains a routerview itself
             {
-                path: '/about/team',
+                path: 'team',
                 component: AboutTeam
             },
             {
-                path: '/about/services',
-                component: AboutServices
+                path: 'goal',
+                component: AboutGoal
             },
             ]
         },
@@ -38,6 +39,10 @@ const options = {
         {
             path:'/books/edit/:bookId?', // ? is for optional last parameter-bookId
             component: BookEdit
+        },
+        {
+            path:'/addBook', // ? is for optional last parameter-bookId
+            component: BookAdd
         },
         {
             path: '/:catchAll(.*)',

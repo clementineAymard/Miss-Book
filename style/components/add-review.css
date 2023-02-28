@@ -19,8 +19,8 @@
 }
 
 
-.add-review .review-form input,
-.add-review .review-form select,
+.add-review .review-form input:not([type="radio"]),
+/* .add-review .review-form select, */
 .add-review .review-form button {
     line-height: 1.5;
     padding-inline: 5px;
@@ -33,10 +33,10 @@
     cursor: pointer;
 }
 
-.add-review .review-form select {
+/* .add-review .review-form select {
     width: fit-content;
     padding-block: 3px;
-}
+} */
 
 .add-review .review-form label {
     font-style: italic;

@@ -3,7 +3,49 @@
 
 /* SMALL: */
 
-@media (max-width: 630px) {}
+@media (max-width: 620px) {
+    .app-header nav {
+        flex-direction: column;
+        transform: translateY(-100vh);
+        transition: transform 0.6s;
+        position: absolute;
+        top: 80px;
+        right: -2rem;
+        background-color: var(--clrbg-dark);
+    }
+
+    .app-header nav a {
+        text-align: center;
+        border-bottom: solid 1px var(--clrtxt);
+    }
+
+    .app-header nav .router-link-active {
+        background-color: cadetblue;
+        box-shadow: none;
+    }
+
+    .btn-ham-menu::before {
+        content: '☰';
+        font-size: 3rem;
+        cursor: pointer;
+        margin-inline-end: 2rem;
+    }
+    .app-header.hamb-menu-open .btn-ham-menu::before {
+        content: 'X';
+    }
+
+    .app-header.hamb-menu-open nav {
+        transform: translateY(0);
+    }
+    .logo * {
+        font-size: 1.8rem;
+    }
+
+    .home-page {
+        margin-inline: 20px;
+        margin-inline-end: 20px;
+    }
+}
 
 
 @media (min-width:360px) {}

@@ -3,73 +3,86 @@
     padding: 10px;
     font-family: calibri;
     gap:2rem;
-
+    
     margin: 20px;
 }
 
-.book-details img {
-    width: 200px;
+.book-details .details-container {
+    justify-content: start;
+    gap:50px;
+}
+
+.book-details .details-container .details {
+    min-width: 300px;
+    max-width:600px;
+    overflow-y: visible;
+}
+
+.book-details .details-container img {
+    min-width:100px;
+    max-width: 200px;
+
     align-self: start;
     object-fit: contain;
 }
 
-.book-details .title,
-.book-details .price {
+.book-details .details-container .details .title,
+.book-details .details-container .details .price {
     font-weight: bold;
     font-size: 1.2rem;
 }
 
-.book-details .price {
+.book-details .details-container .details .price {
     align-self: end;
 }
 
-.book-details .title:not(span) {
+.book-details .details-container .details  .title:not(span) {
     text-transform: uppercase;
 }
 
-.book-details button {
+.book-details .details-container .details button {
     align-self: end;
 }
 
-.book-details h1,
-.book-details h2 {
+.book-details .details-container .details h1,
+.book-details .details-container .details h2 {
     margin: 0;
     font-size: 1rem;
     font-weight: normal;
 }
 
-.book-details h1 {
+.book-details .details-container .details h1 {
     margin-block-end: 10px;
 }
 
-.book-details span:not(.price-amount) {
+.book-details .details-container .details span:not(.price-amount) {
     color: brown;
     font-size: 0.8rem;
     font-weight:bold;
 }
 
-.book-details .authors {
+.book-details .details-container .details .authors {
     font-size: 1rem;
     font-weight: bold;
     color: brown;
 }
 
-.book-details .authors,
-.book-details .categories {
+.book-details .details-container .details .authors,
+.book-details .details-container .details .categories {
     padding: 0;
     margin: 0;
     margin-block-end: 10px;
 }
 
-span.red {
+.book-details .details-container .details span.red {
     color: red
 }
 
-span.green {
+.book-details .details-container .details span.green {
     color: green
 }
 
-.book-details h1.on-sale {
+.book-details .details-container .details h1.on-sale {
     color: firebrick;
     font-weight: bold;
     align-self: center;
@@ -77,12 +90,15 @@ span.green {
     background-color: blanchedalmond;
 }
 
-.book-details .details-container {
-    /* margin-inline: 50px; */
-    justify-content: start;
-    gap:50px;
+.book-details .links > * {
+    color: var(--clrbg-dark);
+    text-decoration:underline ;
+    border-radius: 5px;    
+    padding: 5px;
+    
 }
 
-.book-details .details {
-    width:600px;
+.book-details .links > *:hover {
+    text-decoration:none ;
+    background-color:var(--clrtxt);
 }

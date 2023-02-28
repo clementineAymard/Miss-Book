@@ -23,6 +23,7 @@
 @import './components/add-review.css';
 @import './components/review-list.css';
 @import './components/review-preview.css';
+@import './components/add-book.css';
 
 /* MEDIA QUERIS */
 @import './setup/mq.css';

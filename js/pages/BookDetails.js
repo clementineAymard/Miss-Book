@@ -6,7 +6,7 @@ import { eventBusService } from '../services/event-bus.service.js'
 
 export default {
     template: `
-        <RouterLink to="/books">Back to books</RouterLink> 
+    <RouterLink to="/books" class="backLink">Back to books</RouterLink> 
     <section class="book-details flex column" v-if="book">
         <div class="details-container flex" >
             <img :src="book.thumbnail" >
@@ -20,8 +20,14 @@ export default {
                 <h1><span>Language: </span>{{book.language}}</h1>
                 <h1 class="price"><span>Price: </span><span class="price-amount" v-bind:class="priceClass">{{formattedPrice}}</span></h1>
                 <h1 v-if="book.listPrice.isOnSale===true" class="on-sale"> On Sale ! </h1>
-                <h1><span>Description: </span><LongTxt :txt="book.description" :length="30"/></h1>
+                <h1><span>Description: </span>
+                    <LongTxt :txt="book.description" :length="30"/>
+                </h1>
             </div>
+        </div>
+        <div class="links flex space-between">
+            <RouterLink :to="'/books/' + book.prevBookId">Previous Book</RouterLink>
+            <RouterLink :to="'/books/' + book.nextBookId">Next Book</RouterLink>
         </div>
         <AddReview :book="this.book" @addedReview="addReview"/>
         <ReviewList :reviews="this.book.reviews" @remove="removeReview"/>
@@ -54,8 +60,15 @@ export default {
                     this.book = book
                 })
         },
+        loadBook(){
+            bookService.get(this.bookId)
+                .then(book => this.book = book)
+        },
     },
     computed: {
+        bookId(){
+            return this.$route.params.bookId
+        },
         level() {
             const pageCount = this.book.pageCount
             if (pageCount < 100) return 'Light Reading'
@@ -90,9 +103,14 @@ export default {
         ReviewList,
     },
     created() {
-        const { bookId } = this.$route.params
-        bookService.get(bookId)
-            .then(book => this.book = book)
+        this.loadBook()
+        // const { bookId } = this.$route.params
+        // bookService.get(bookId)
+            // .then(book => this.book = book)
     },
-    // etc.
+    watch :{
+        bookId(){
+            this.loadBook()
+        }
+    }
 }

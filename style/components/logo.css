@@ -1,6 +1,8 @@
-.logo {
+.logo > *{
+    font-family: gloock;
     font-size: 2rem;
-
+    color: var(--clrtxt);
+    text-decoration: none;
     padding-inline: 0.625rem;
     margin:0;
     margin-inline-start: 2rem;

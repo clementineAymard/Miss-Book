@@ -455,6 +455,7 @@ export const bookService = {
     getEmptyBook,
     addReview,
     removeReview,
+    addGoogleBook,
 }
 
 function query(filterBy = {}) {
@@ -462,10 +463,10 @@ function query(filterBy = {}) {
         .then(books => {
             if (filterBy.txt) {
                 const regex = new RegExp(filterBy.txt, 'i')
-                books = books.filter(book => regex.test(book.vendor))
+                books = books.filter(book => regex.test(book.title))
             }
-            if (filterBy.minSpeed) {
-                books = books.filter(book => book.maxSpeed >= filterBy.minSpeed)
+            if (filterBy.price) {
+                books = books.filter(book => book.price >= filterBy.price)
             }
             return books
         })
@@ -473,6 +474,8 @@ function query(filterBy = {}) {
 
 function get(bookId) {
     return storageService.get(BOOK_KEY, bookId)
+        .then(_setNextPrevBookId)
+
 }
 
 function remove(bookId) {
@@ -487,9 +490,35 @@ function save(book) {
     }
 }
 
+function addGoogleBook(googleBook) {
+    console.log('add google book-save', googleBook)
+
+    return query().then(books => {
+        var isSaved = books.find(book => book.title === googleBook.title)
+        if (isSaved) return 
+        else { // if book is not yet saved : create & save to DB new book
+        const { title, authors, categories, description, subtitle, publishedDate, pageCount, language, imageLinks } = googleBook
+        
+        var newBook = getEmptyBook()
+        newBook.title = title ? title : 'unknown'
+        newBook.subtitle = subtitle ? subtitle : 'unknown'
+        newBook.authors = authors ? authors : 'unknown'
+        newBook.categories = categories ? categories : 'unknown'
+        newBook.description = description ? description : 'unknown'
+        newBook.language = language ? language : 'unknown'
+        newBook.pageCount = pageCount ? pageCount : 'unknown'
+        newBook.publishedDate = publishedDate ? publishedDate : 'unknown'
+        newBook.thumbnail = imageLinks ? imageLinks.thumbnail : 'unknown'
+        console.log('adding new book:', newBook)
+        return save(newBook)   
+        }
+        
+    })
+}
+
 function getEmptyBook(title = '', price = 0) {
     return {
-        id: utilService.makeId(11),
+        id: null,
         title: title,
         subtitle: 'mi est eros convallis auctor arcu dapibus himenaeos',
         authors: [
@@ -511,7 +540,6 @@ function getEmptyBook(title = '', price = 0) {
         },
         reviews: []
     }
-
     // { id: '', title, listPrice: {amount: price} }
 }
 
@@ -529,7 +557,7 @@ function addReview(bookId, review) {
 }
 
 function removeReview(bookId, reviewId) {
-    return get(bookId).then(book=> {
+    return get(bookId).then(book => {
         var reviewIdx = book.reviews.findIndex(review => review.id === reviewId)
         book.reviews.splice(reviewIdx, 1)
         return save(book)
@@ -544,8 +572,17 @@ function _createBooks() {
     }
 }
 
-function _createBook(vendor, maxSpeed = 250) {
+function _createBook(title, price = 50) {
     const book = getEmptyBook(title, listPrice.amount)
     book.id = utilService.makeId()
     return book
+}
+
+function _setNextPrevBookId(book) {
+    return storageService.query(BOOK_KEY).then(books => {
+        const idx = books.findIndex(currbook => currbook.id === book.id)
+        book.nextBookId = books[idx + 1] ? books[idx + 1].id : books[0].id
+        book.prevBookId = books[idx - 1] ? books[idx - 1].id : books[books.length - 1].id
+        return book
+    })
 }

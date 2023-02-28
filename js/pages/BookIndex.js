@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             books: null,
-            filterBy: { title: '', listPrice: { amount: 10 } },
+            filterBy: { title: '', listPrice: { amount: 0 } },
         }
     },
     methods: {
@@ -51,7 +51,10 @@ export default {
     },
     created() { // RELATES TO DATA
         bookService.query()
-            .then(books => this.books = books)
+            .then(books => {
+                console.log('books', books)
+                this.books = books })
+                console.log('this.books', this.books)
     },
     mounted(){}, // RELATES TO DOM
     components: {

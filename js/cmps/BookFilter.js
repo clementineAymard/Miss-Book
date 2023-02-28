@@ -7,10 +7,11 @@ export default {
                 @input="filter" 
                 placeholder="Search Title"
                 type="text"/>
+            <label class="filter-price">Minimum Price :</label>
             <input 
                 v-model="filterBy.listPrice.amount"
                 @input="filter" 
-                min="10"
+                min="0"
                 max="200"
                 type="range"/>
             <label v-if="filterBy">{{this.filterBy.listPrice.amount}}</label>
@@ -19,7 +20,7 @@ export default {
     `,
     data() {
         return {
-            filterBy: { title: '', listPrice: { amount: 10 } }
+            filterBy: { title: '', listPrice: { amount: 0 } }
         }
     },
     methods: {

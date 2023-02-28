@@ -1,11 +1,25 @@
 .about-page {
     padding: 10px;
     width: 50vw;
+    min-width: 300px;
     margin: auto;
-    margin-block-start: 50px;
+    margin-block-start: 20px;
     text-align: center;
 }
-
+.about-page h2 {
+    margin-block-start: 0;
+}
 .about-page p {
     line-height: 1.5;
+}
+
+.about-page .about-link {
+    text-decoration: none;
+    color:cadetblue;
+    font-weight: bold;
+}
+
+
+.about-page .about-link.router-link-active {
+text-decoration: underline;
 }
